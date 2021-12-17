@@ -35,6 +35,15 @@ public:
 	UPROPERTY(EditAnywhere, Category = Speed)
 	float RunSpeed;
 
+	UPROPERTY(EditAnywhere, Category = Health)
+	int Damage;
+
+	UPROPERTY(EditAnywhere, Category = Health)
+	int Health;
+
+	UPROPERTY()
+	FVector SpawnLocation;
+	;
 protected:
 
 	void BeginPlay() override;
@@ -44,6 +53,9 @@ protected:
 
 	UFUNCTION()
 	void OnStopRun();
+
+	UFUNCTION(BlueprintCallable)
+	int TakeDmg();
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();

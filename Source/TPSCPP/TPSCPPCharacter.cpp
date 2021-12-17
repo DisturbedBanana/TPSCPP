@@ -8,6 +8,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "GameFramework/Actor.h"
+#include <Runtime/Engine/Classes/Kismet/GameplayStatics.h>
 
 //////////////////////////////////////////////////////////////////////////
 // ATPSCPPCharacter
@@ -48,6 +50,14 @@ ATPSCPPCharacter::ATPSCPPCharacter()
 
 	WalkSpeed = 50.f;
 	RunSpeed = 120.f;
+
+	JumpMaxCount = 2;
+
+	Health = 3;
+	Damage = 1;
+
+	
+	;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -82,12 +92,13 @@ void ATPSCPPCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ATPSCPPCharacter::OnResetVR);
 }
 
-
 void ATPSCPPCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
 	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+
+	SpawnLocation = GetActorLocation();
 }
 
 void ATPSCPPCharacter::OnStartRun()
@@ -98,6 +109,17 @@ void ATPSCPPCharacter::OnStartRun()
 void ATPSCPPCharacter::OnStopRun()
 {
 	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+}
+
+int ATPSCPPCharacter::TakeDmg()
+{
+	Health = Health - Damage;
+
+	if (Health <= 0)
+	{
+		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()));
+	}
+	return Health;
 }
 
 void ATPSCPPCharacter::OnResetVR()
