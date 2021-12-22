@@ -70,6 +70,9 @@ void ATPSCPPCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
+	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &ACharacter::Crouch);
+	PlayerInputComponent->BindAction("Crouch", IE_Released, this, &ACharacter::StopJumping);
+
 	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &ATPSCPPCharacter::OnStartRun);
 	PlayerInputComponent->BindAction("Run", IE_Released, this, &ATPSCPPCharacter::OnStopRun);
 
