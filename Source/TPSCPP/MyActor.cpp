@@ -37,5 +37,5 @@ void AMyActor::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiv
 		return;
 	}
 
-	charac->LaunchCharacter(FVector(0, 0, 1000),false, true);
+	charac->LaunchCharacter(FVector(0, 0, 10000),false, true);
 }
